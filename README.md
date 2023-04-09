@@ -1,5 +1,10 @@
 # Kotest Android
 
+[![License](https://img.shields.io/github/license/LeoColman/kotest-android)](LICENSE)
+![Maintenance](https://img.shields.io/maintenance/yes/2023)
+[![Kotest Repository](https://img.shields.io/badge/Kotest-kotest.io-green)](https://kotest.io/)
+
+
 Unofficial integration between the [Kotest Framework](https://kotest.io) and
 the [Android Platform](https://developer.android.com/docs). This repository aims to contain the tools necessary to run
 Kotest in the complicated Android environment, with [`kotest-runner-android`](#kotest-runner-android) - a customized
@@ -10,6 +15,7 @@ containing matchers and assertions specific to Android
 ----
 
 ## Kotest Runner Android
+![Maven Central](https://img.shields.io/maven-central/v/br.com.colman/kotest-runner-android)
 
 A custom version
 of [`kotest-runner-junit4`](https://github.com/kotest/kotest/tree/master/kotest-runner/kotest-runner-junit4) made
@@ -45,5 +51,7 @@ To `androidTestImplementation` we are going to add `kotest-runner-android`:
 
 
 ## Kotest Assertions Android
+
+![Maven Central](https://img.shields.io/maven-central/v/br.com.colman/kotest-assertions-android)
 
 Documentation WIP
