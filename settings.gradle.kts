@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "kotest-android"
 
 include(":kotest-runner-android", ":kotest-runner-android:kotest-runner-android-tests")
+
+include(":kotest-assertions-android")
