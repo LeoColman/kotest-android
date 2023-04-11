@@ -1,4 +1,4 @@
-name: Release
+name: Release Runner
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
           fetch-depth: 0
 
       - name: Publish to Maven Central
-        run: ./gradlew publish
+        run: ./gradlew kotest-runner-android:publish
         env:
           RELEASE_VERSION: ${{ github.event.inputs.version }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}

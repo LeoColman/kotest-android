@@ -1,9 +1,10 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
   kotlin("android")
   kotlin("kapt")
   id("com.android.library")
+  id("org.jetbrains.dokka") version "1.8.10"
+  `maven-publish`
+  signing
 }
 
 android {
@@ -48,4 +49,77 @@ dependencies {
   androidTestImplementation("androidx.test:rules:1.5.0")
   androidTestImplementation("androidx.test:core-ktx:1.5.0")
 
+}
+
+val sourcesJar by tasks.registering(Jar::class) {
+  archiveClassifier.set("sources")
+  from(kotlin.sourceSets["main"].kotlin.srcDirs)
+  from(android.sourceSets["main"].java.srcDirs)
+}
+
+val javadocJar by tasks.registering(Jar::class) {
+  dependsOn("dokkaHtml")
+  archiveClassifier.set("javadoc")
+  from("$buildDir/dokka")
+}
+
+publishing {
+  repositories {
+    maven("https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+      credentials {
+        username = System.getenv("OSSRH_USERNAME")
+        password = System.getenv("OSSRH_PASSWORD")
+      }
+    }
+  }
+
+  publications.create<MavenPublication>("mavenJava") {
+    artifact(javadocJar.get())
+    artifact(sourcesJar.get())
+
+    groupId = "br.com.colman"
+    artifactId = "kotest-assertions-android"
+    version = System.getenv("RELEASE_VERSION") ?: "local"
+
+    pom {
+      name.set("kotest-assertions-android")
+      description.set("Kotest Assertions Android")
+      url.set("https://www.github.com/LeoColman/kotest-android")
+
+
+      scm {
+        connection.set("scm:git:http://www.github.com/LeoColman/kotest-android/")
+        developerConnection.set("scm:git:http://github.com/LeoColman/")
+        url.set("https://www.github.com/LeoColman/")
+      }
+
+      licenses {
+        license {
+          name.set("Apache License 2.0")
+          url.set("https://opensource.org/licenses/Apache-2.0")
+        }
+      }
+
+      developers {
+        developer {
+          id.set("LeoColman")
+          name.set("Leonardo Colman Lopes")
+          email.set("dev@leonardo.colman.com.br")
+        }
+      }
+    }
+  }
+}
+
+
+val signingKey: String? by project
+val signingPassword: String? by project
+
+signing {
+  useGpgCmd()
+  if (signingKey != null && signingPassword != null) {
+    useInMemoryPgpKeys(signingKey, signingPassword)
+  }
+
+  sign(publishing.publications)
 }

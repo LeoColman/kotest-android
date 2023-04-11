@@ -1,0 +1,27 @@
+name: Release Assertions
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release Version"
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Publish to Maven Central
+        run: ./gradlew kotest-assertions-android:publish
+        env:
+          RELEASE_VERSION: ${{ github.event.inputs.version }}
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
