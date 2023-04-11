@@ -4,7 +4,6 @@
 ![Maintenance](https://img.shields.io/maintenance/yes/2023)
 [![Kotest Repository](https://img.shields.io/badge/Kotest-kotest.io-green)](https://kotest.io/)
 
-
 Unofficial integration between the [Kotest Framework](https://kotest.io) and
 the [Android Platform](https://developer.android.com/docs). This repository aims to contain the tools necessary to run
 Kotest in the complicated Android environment, with [`kotest-runner-android`](#kotest-runner-android) - a customized
@@ -15,6 +14,7 @@ containing matchers and assertions specific to Android
 ----
 
 ## Kotest Runner Android
+
 ![Maven Central](https://img.shields.io/maven-central/v/br.com.colman/kotest-runner-android)
 
 A custom version
@@ -42,16 +42,54 @@ android {
 
 #### Dependencies Configuration
 
-
-
 To `androidTestImplementation` we are going to add `kotest-runner-android`:
+
 ```kotlin
   androidTestImplementation("br.com.colman:kotest-runner-android:VERSION")
 ```
-
 
 ## Kotest Assertions Android
 
 ![Maven Central](https://img.shields.io/maven-central/v/br.com.colman/kotest-assertions-android)
 
-Documentation WIP
+#### Dependencies Configuration
+
+To `androidTestImplementation` we are going to add `kotest-assertions-android`:
+
+```kotlin
+  androidTestImplementation("br.com.colman:kotest-assertions-android:VERSION")
+```
+
+#### Available Matchers
+
+Documentation and format to be improved.
+
+
+<details>
+<summary>Open Spoiler for Details</summary>
+
+| View                                      |                                                          |
+|-------------------------------------------|----------------------------------------------------------|
+| `view.shouldBeVisible()`                  | Asserts that the view visibility is VISIBLE              |
+| `view.shouldBeInvisible()`                | Asserts that the view visibility is INVISIBLE            |
+| `view.shouldBeGone()`                     | Asserts that the view visibility is GONE                 |
+| `view.shouldHaveContentDescription()`     | Asserts that the view has any content description        |
+| `view.shouldHaveContentDescription(desc)` | Asserts that the view has `desc` as Content Description  |
+| `view.shouldHaveTag(key, value)`          | Asserts that the view has a tag `key` with value `value` |
+| `view.shouldHaveTag(any)`                 | Asserts that the view's tag is `any`                     |
+| `view.shouldBeEnabled()`                  | Asserts that the view is enabled                         |
+| `view.shouldBeFocused()`                  | Asserts that the view has focus                          |
+| `view.shouldBeFocusable()`                | Asserts that the view is focusable                       |
+| `view.shouldBeFocusableInTouchMode()`     | Asserts that the view is focusable in touch mode         |
+| `view.shouldBeClickable()`                | Asserts that the view is clickable                       |
+| `view.shouldBeLongClickable()`            | Asserts that the view is long clickable                  |
+
+| TextView                                |                                                                  |
+|-----------------------------------------|------------------------------------------------------------------|
+| `tv.shouldHaveText(text)`               | Asserts that the text view has text `text`                       |
+| `tv.shouldHaveTextColorId(id)`          | Asserts that the text color is the same from color resource `id` |
+| `tv.shouldHaveTextColor(colorInt)`      | Asserts that the text color is `colorInt`                        |
+| `tv.shouldBeAllCaps()`                  | Asserts that the textview is marked with the `isAllCaps` flag    |
+| `tv.shouldHaveTextAlignment(alignment)` | Asserts that the text alignment is `alignment`                   |
+
+</details>
