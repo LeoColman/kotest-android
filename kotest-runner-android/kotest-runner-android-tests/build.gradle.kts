@@ -22,6 +22,11 @@ android {
     exclude("win32-x86/**")
     exclude("win32-x86-64/**")
   }
+
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+  }
 }
 
 

@@ -6,7 +6,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import io.kotest.matchers.shouldBe
 import org.junit.runner.RunWith
 
-//@RunWith(KotestRunnerAndroid::class)
+@RunWith(KotestRunnerAndroid::class)
 class ExampleInstrumentedAndroidTestPass : FunSpec({
 
     test("Use app context") {
