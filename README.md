@@ -1,7 +1,7 @@
 # Kotest Android
 
 [![License](https://img.shields.io/github/license/LeoColman/kotest-android)](LICENSE)
-![Maintenance](https://img.shields.io/maintenance/yes/2023)
+![Maintenance](https://img.shields.io/maintenance/yes/2024)
 [![Kotest Repository](https://img.shields.io/badge/Kotest-kotest.io-green)](https://kotest.io/)
 
 Unofficial integration between the [Kotest Framework](https://kotest.io) and
