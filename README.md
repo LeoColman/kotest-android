@@ -48,6 +48,40 @@ To `androidTestImplementation` we are going to add `kotest-runner-android`:
   androidTestImplementation("br.com.colman:kotest-runner-android:VERSION")
 ```
 
+## Kotest Extensions Android
+![Maven Central](https://img.shields.io/maven-central/v/br.com.colman/kotest-extensions-android)
+
+#### Dependencies Configuration
+To `testImplementation` we are going to add `kotest-extensions-android`:
+
+```kotlin
+  testImplementation("br.com.colman:kotest-extensions-android:VERSION")
+```
+
+#### Available Extensions
+
+##### Robolectric Extension
+
+The Robolectric Extension enables tests to operate under the [Robolectric](https://robolectric.org/) environment. To
+utilize this feature, adorn the unit tests that you wish to run with Robolectric with the `@RobolectricTest` annotation.
+Tests will be executed within the integrated Robolectric environment. `@Config` annotations can be used for Robolectric
+specific configurations.
+
+Here is a Kotlin example of how to use the annotation:
+
+```kotlin
+@RobolectricTest(sdk = Build.VERSION_CODES.O)
+class ContainedRobolectricRunnerMergeApiVersionTest {
+  init {
+    "Get the Build.VERSION_CODES.O" {
+      Build.VERSION.SDK_INT shouldBe Build.VERSION_CODES.O
+    }
+  }
+}
+```
+
+
+
 ## Kotest Assertions Android
 
 ![Maven Central](https://img.shields.io/maven-central/v/br.com.colman/kotest-assertions-android)
