@@ -74,7 +74,7 @@ publishing {
   }
 
   publications.create<MavenPublication>("mavenJava") {
-    from(components["java"])
+    from(components["release"])
     artifact(javadocJar.get())
     artifact(sourcesJar.get())
 
