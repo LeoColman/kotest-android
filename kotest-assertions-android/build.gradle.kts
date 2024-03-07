@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
+
 plugins {
   kotlin("android")
   kotlin("kapt")
@@ -74,7 +76,7 @@ publishing {
   }
 
   publications.create<MavenPublication>("mavenJava") {
-    from(components["release"])
+    afterEvaluate { from(components["release"]) }
     artifact(javadocJar.get())
     artifact(sourcesJar.get())
 
@@ -111,6 +113,9 @@ publishing {
     }
   }
 }
+
+tasks.named("dokkaHtml").dependsOn("kaptReleaseKotlin")
+
 
 
 val signingKey: String? by project
