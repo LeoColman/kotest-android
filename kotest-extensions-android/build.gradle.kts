@@ -43,10 +43,10 @@ configurations {
 
 dependencies {
   implementation(kotlin("reflect"))
-  implementation("io.kotest:kotest-framework-api:5.8.0")
+  implementation("io.kotest:kotest-framework-api:5.9.0")
   implementation("org.robolectric:robolectric:4.11.1")
   implementation("junit:junit:4.13.2")
-  implementation("androidx.appcompat:appcompat:1.6.1")
+  implementation("androidx.appcompat:appcompat:1.7.0")
 
   androidTestImplementation(project(":kotest-runner-android"))
   androidTestImplementation("androidx.test:runner:1.5.2")
