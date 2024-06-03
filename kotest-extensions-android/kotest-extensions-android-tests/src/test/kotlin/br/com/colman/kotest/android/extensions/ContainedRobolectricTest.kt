@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import br.com.colman.kotest.TestApplication
 import br.com.colman.kotest.android.extensions.robolectric.RobolectricTest
+import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -65,3 +66,20 @@ abstract class ContainedRobolectricRunnerMergeOverwriteTest : StringSpec({
 @Suppress("ClassName")
 @RobolectricTest(sdk = Build.VERSION_CODES.O_MR1)
 class ContainedRobolectricRunnerMergeOverwriteO_MR1Test : ContainedRobolectricRunnerMergeOverwriteTest()
+
+@RobolectricTest
+class ContainedRobolectricRunnerDefaultApplicationBehaviorSpecTest : BehaviorSpec({
+  Context("Get the Application defined in AndroidManifest.xml") {
+    Given("A application context") {
+      val applicationContext = ApplicationProvider.getApplicationContext<Application>()
+
+      When("Get class from application context") {
+        val applicationClass = applicationContext::class
+
+        Then("It should be TestApplication") {
+          applicationClass shouldBe TestApplication::class
+        }
+      }
+    }
+  }
+})
