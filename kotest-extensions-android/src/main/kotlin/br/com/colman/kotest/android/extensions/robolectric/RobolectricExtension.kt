@@ -1,19 +1,22 @@
 package br.com.colman.kotest.android.extensions.robolectric
 
 import android.app.Application
-import io.kotest.common.runBlocking
 import io.kotest.core.extensions.ConstructorExtension
 import io.kotest.core.extensions.TestCaseExtension
 import io.kotest.core.spec.AutoScan
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
+import io.kotest.core.test.isRootTest
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.withContext
 import org.robolectric.annotation.Config
-import java.util.concurrent.Callable
+import org.robolectric.internal.bytecode.Sandbox
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 import kotlin.time.Duration
 import java.util.WeakHashMap
+import java.util.concurrent.ExecutorService
 
 /**
  * We override TestCaseExtension to configure the Robolectric environment because TestCase intercept
@@ -110,17 +113,28 @@ class RobolectricExtension : ConstructorExtension, TestCaseExtension {
     execute: suspend (TestCase) -> TestResult,
   ): TestResult {
     val containedRobolectricRunner = runnerMap[testCase.spec]!!
-    // sdkEnvironment.runOnMainThread is important to ensure Robolectric's
+    // Using sdkEnvironment.executorService to ensure Robolectric's
     // looper state doesn't carry over to the next test class.
-    return containedRobolectricRunner.sdkEnvironment.runOnMainThread(
-      Callable {
+    val executorService = containedRobolectricRunner.sdkEnvironment.getExecutorService()
+    return withContext(executorService.asCoroutineDispatcher()) {
+      if (testCase.isRootTest()) {
         containedRobolectricRunner.containedBefore()
-        val result = runBlocking { execute(testCase) }
+      }
+      val result = execute(testCase)
+      if (testCase.isRootTest()) {
         containedRobolectricRunner.containedAfter()
-        result
-      },
-    )
+      }
+      result
+    }
   }
+}
+
+private fun Sandbox.getExecutorService(): ExecutorService {
+  val field = Sandbox::class.java.declaredFields
+    .firstOrNull { it.type == ExecutorService::class.java }
+  checkNotNull(field) { "Not found ExecutorService field." }
+  field.isAccessible = true
+  return field.get(this) as ExecutorService
 }
 
 internal class KotestDefaultApplication : Application()
