@@ -43,7 +43,7 @@ configurations {
 
 dependencies {
   implementation(kotlin("reflect"))
-  implementation("io.kotest:kotest-framework-api:5.9.0")
+  implementation("io.kotest:kotest-framework-api:5.9.1")
   implementation("org.robolectric:robolectric:4.12.2")
   implementation("junit:junit:4.13.2")
   implementation("androidx.appcompat:appcompat:1.7.0")
