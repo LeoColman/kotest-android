@@ -115,7 +115,9 @@ class RobolectricExtension : ConstructorExtension, TestCaseExtension {
     val containedRobolectricRunner = runnerMap[testCase.spec]!!
     // Using sdkEnvironment.executorService to ensure Robolectric's
     // looper state doesn't carry over to the next test class.
-    val executorService = containedRobolectricRunner.sdkEnvironment.getExecutorService()
+    val executorService =
+      Sandbox::class.java
+        .getValue<ExecutorService>(containedRobolectricRunner.sdkEnvironment)
     return withContext(executorService.asCoroutineDispatcher()) {
       if (testCase.isRootTest()) {
         containedRobolectricRunner.containedBefore()
@@ -127,14 +129,6 @@ class RobolectricExtension : ConstructorExtension, TestCaseExtension {
       result
     }
   }
-}
-
-private fun Sandbox.getExecutorService(): ExecutorService {
-  val field = Sandbox::class.java.declaredFields
-    .firstOrNull { it.type == ExecutorService::class.java }
-  checkNotNull(field) { "Not found ExecutorService field." }
-  field.isAccessible = true
-  return field.get(this) as ExecutorService
 }
 
 internal class KotestDefaultApplication : Application()
