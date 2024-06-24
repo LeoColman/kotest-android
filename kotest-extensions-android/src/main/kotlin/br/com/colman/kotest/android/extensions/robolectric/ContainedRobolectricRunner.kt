@@ -6,18 +6,15 @@ import org.junit.runners.model.FrameworkMethod
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.internal.bytecode.InstrumentationConfiguration
-import org.robolectric.pluginapi.config.ConfigurationStrategy
 import org.robolectric.pluginapi.config.Configurer
 import org.robolectric.plugins.HierarchicalConfigurationStrategy
+import org.robolectric.util.inject.Injector
 import java.lang.reflect.Method
 
 @RunWith(Enclosed::class)
 internal class ContainedRobolectricRunner(
-  private val config: Config
-) : RobolectricTestRunner(PlaceholderTest::class.java, injector) {
-  init {
-    injectKotestConfig()
-  }
+  config: Config
+) : RobolectricTestRunner(PlaceholderTest::class.java, kotestInjector(config)) {
 
   private val placeHolderMethod: FrameworkMethod = children[0]
   val sdkEnvironment = getSandbox(placeHolderMethod).also {
@@ -43,16 +40,6 @@ internal class ContainedRobolectricRunner(
       .build()
   }
 
-  private fun injectKotestConfig() {
-    val configurationStrategyField =
-      RobolectricTestRunner::class.java
-        .getField(ConfigurationStrategy::class.java)
-        .apply { isAccessible = true }
-    val configurers = injector.getInstance(arrayOf<Configurer<*>>()::class.java)
-    val newConfigurationStrategy = KotestHierarchicalConfigurationStrategy(config, configurers)
-    configurationStrategyField.set(this, newConfigurationStrategy)
-  }
-
   class PlaceholderTest {
     @org.junit.Test
     fun testPlaceholder() {
@@ -76,6 +63,10 @@ internal class ContainedRobolectricRunner(
   }
 
   companion object {
-    private val injector = defaultInjector().build()
+    private fun kotestInjector(config: Config): Injector {
+      val defaultInjector = defaultInjector().bind(Config::class.java, config).build()
+      return Injector.Builder(defaultInjector, ContainedRobolectricRunner::class.java.classLoader)
+        .build()
+    }
   }
 }
