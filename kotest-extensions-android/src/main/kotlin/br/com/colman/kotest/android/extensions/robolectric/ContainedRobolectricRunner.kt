@@ -37,6 +37,7 @@ internal class ContainedRobolectricRunner(
   override fun createClassLoaderConfig(method: FrameworkMethod?): InstrumentationConfiguration {
     return InstrumentationConfiguration.Builder(super.createClassLoaderConfig(method))
       .doNotAcquirePackage("io.kotest")
+      .doNotAcquirePackage("kotlinx.coroutines")
       .build()
   }
 

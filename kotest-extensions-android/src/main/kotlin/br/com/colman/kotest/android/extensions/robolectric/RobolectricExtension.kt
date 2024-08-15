@@ -8,15 +8,11 @@ import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.core.test.isRootTest
-import kotlinx.coroutines.asCoroutineDispatcher
-import kotlinx.coroutines.withContext
 import org.robolectric.annotation.Config
-import org.robolectric.internal.bytecode.Sandbox
+import java.util.WeakHashMap
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 import kotlin.time.Duration
-import java.util.WeakHashMap
-import java.util.concurrent.ExecutorService
 
 /**
  * We override TestCaseExtension to configure the Robolectric environment because TestCase intercept
@@ -113,21 +109,14 @@ class RobolectricExtension : ConstructorExtension, TestCaseExtension {
     execute: suspend (TestCase) -> TestResult,
   ): TestResult {
     val containedRobolectricRunner = runnerMap[testCase.spec]!!
-    // Using sdkEnvironment.executorService to ensure Robolectric's
-    // looper state doesn't carry over to the next test class.
-    val executorService =
-      Sandbox::class.java
-        .getValue<ExecutorService>(containedRobolectricRunner.sdkEnvironment)
-    return withContext(executorService.asCoroutineDispatcher()) {
-      if (testCase.isRootTest()) {
-        containedRobolectricRunner.containedBefore()
-      }
-      val result = execute(testCase)
-      if (testCase.isRootTest()) {
-        containedRobolectricRunner.containedAfter()
-      }
-      result
+    if (testCase.isRootTest()) {
+      containedRobolectricRunner.containedBefore()
     }
+    val result = execute(testCase)
+    if (testCase.isRootTest()) {
+      containedRobolectricRunner.containedAfter()
+    }
+    return result
   }
 }
 
