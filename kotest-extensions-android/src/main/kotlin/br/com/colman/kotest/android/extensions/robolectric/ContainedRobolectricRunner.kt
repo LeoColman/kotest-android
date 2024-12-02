@@ -6,6 +6,7 @@ import org.junit.runners.model.FrameworkMethod
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.internal.bytecode.InstrumentationConfiguration
+import org.robolectric.pluginapi.config.ConfigurationStrategy
 import org.robolectric.pluginapi.config.Configurer
 import org.robolectric.plugins.HierarchicalConfigurationStrategy
 import org.robolectric.util.inject.Injector
@@ -65,7 +66,10 @@ internal class ContainedRobolectricRunner(
 
   companion object {
     private fun kotestInjector(config: Config): Injector {
-      val defaultInjector = defaultInjector().bind(Config::class.java, config).build()
+      val defaultInjector = defaultInjector()
+        .bind(Config::class.java, config)
+        .bind(ConfigurationStrategy::class.java, KotestHierarchicalConfigurationStrategy::class.java)
+        .build()
       return Injector.Builder(defaultInjector, ContainedRobolectricRunner::class.java.classLoader)
         .build()
     }
