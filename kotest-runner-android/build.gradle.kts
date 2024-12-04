@@ -1,6 +1,6 @@
 plugins {
   kotlin("jvm")
-  id("org.jetbrains.dokka") version "1.8.10"
+  id("org.jetbrains.dokka") version "1.9.20"
   `maven-publish`
   signing
 }
