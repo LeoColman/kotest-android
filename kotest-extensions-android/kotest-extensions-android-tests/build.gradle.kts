@@ -41,6 +41,8 @@ dependencies {
   testImplementation(project(":kotest-extensions-android"))
   testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
   testImplementation("org.robolectric:robolectric:4.12.2")
+  testImplementation("androidx.test.espresso:espresso-core:3.6.1")
+  testImplementation("org.junit.vintage:junit-vintage-engine:5.11.3")
   androidTestImplementation("androidx.test:runner:1.5.2")
   androidTestImplementation("androidx.test:core:1.5.0")
   androidTestImplementation("androidx.test:rules:1.5.0")
