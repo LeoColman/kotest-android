@@ -3,6 +3,8 @@ plugins {
   kotlin("android")
 }
 
+kotlin { jvmToolchain(11) }
+
 android {
   namespace = "br.com.colman.kotest"
   compileSdk = 33
@@ -27,6 +29,7 @@ android {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
   }
+  kotlinOptions { jvmTarget = "11"}
 }
 
 

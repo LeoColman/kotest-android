@@ -4,12 +4,16 @@ plugins {
   kotlin("android")
   kotlin("kapt")
   id("com.android.library")
-  id("org.jetbrains.dokka") version "1.8.10"
+  id("org.jetbrains.dokka") version "1.9.10"
   `maven-publish`
   signing
 }
 
+
+kotlin { jvmToolchain(11) }
+
 android {
+  namespace = "br.com.colman.kotest.assertions"
   compileSdk = 33
   defaultConfig {
     minSdk = 21
@@ -17,6 +21,7 @@ android {
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
+
   buildTypes {
     getByName("release") {
       isMinifyEnabled = false
@@ -27,6 +32,7 @@ android {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
   }
+  kotlinOptions { jvmTarget = "11"}
 
   packagingOptions {
     exclude("META-INF/AL2.0")
@@ -43,7 +49,7 @@ configurations {
 
 dependencies {
   implementation("androidx.core:core-ktx:1.10.0")
-  implementation("io.kotest:kotest-assertions-core:5.9.1")
+  implementation("io.kotest:kotest-assertions-core:6.0.0.M4")
 
   androidTestImplementation(project(":kotest-runner-android"))
   androidTestImplementation("androidx.test:runner:1.5.2")
@@ -115,8 +121,6 @@ publishing {
 }
 
 tasks.named("dokkaHtml").dependsOn("kaptReleaseKotlin")
-
-
 
 val signingKey: String? by project
 val signingPassword: String? by project

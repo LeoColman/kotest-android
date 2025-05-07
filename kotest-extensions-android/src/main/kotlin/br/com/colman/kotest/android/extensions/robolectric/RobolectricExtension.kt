@@ -1,9 +1,9 @@
 package br.com.colman.kotest.android.extensions.robolectric
 
 import android.app.Application
+import io.kotest.core.config.AbstractPackageConfig
 import io.kotest.core.extensions.ConstructorExtension
 import io.kotest.core.extensions.TestCaseExtension
-import io.kotest.core.spec.AutoScan
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
@@ -14,12 +14,15 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 import kotlin.time.Duration
 
+class RoboElectricConfig: AbstractPackageConfig() {
+  override val extensions = listOf(RobolectricExtension())
+}
+
 /**
  * We override TestCaseExtension to configure the Robolectric environment because TestCase intercept
  * occurs on the same thread the test is run.  This is unfortunate because it is run for every test,
  * rather than every spec. But the SpecExtension intercept is run on a different thread.
  */
-@AutoScan
 class RobolectricExtension : ConstructorExtension, TestCaseExtension {
 
   private val runnerMap = WeakHashMap<Spec, ContainedRobolectricRunner>()

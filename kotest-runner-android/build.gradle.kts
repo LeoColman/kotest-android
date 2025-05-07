@@ -1,14 +1,16 @@
 plugins {
   kotlin("jvm")
-  id("org.jetbrains.dokka") version "1.8.10"
+  id("org.jetbrains.dokka") version "1.9.10"
   `maven-publish`
   signing
 }
 
+kotlin { jvmToolchain(11) }
+
 dependencies {
   api("junit:junit:4.13.2")
-  api("io.kotest:kotest-framework-engine:5.9.0")
-  api("io.kotest:kotest-framework-discovery:5.9.1")
+  api("io.kotest:kotest-framework-engine:6.0.0.M4")
+  api("io.kotest:kotest-assertions-core:6.0.0.M4")
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
