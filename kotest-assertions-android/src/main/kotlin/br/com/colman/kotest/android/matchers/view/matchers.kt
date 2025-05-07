@@ -12,8 +12,8 @@ fun View.shouldNotBeVisible() = this shouldNot beVisible()
 fun beVisible() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.visibility == View.VISIBLE,
-    "View should be VISIBLE but was ${value.visibilityAsString()}",
-    "View should not be VISIBLE, but was"
+    { "View should be VISIBLE but was ${value.visibilityAsString()}" },
+    { "View should not be VISIBLE, but was" }
   )
 }
 
@@ -23,8 +23,8 @@ fun View.shouldNotBeInvisible() = this shouldNot beInvisible()
 fun beInvisible() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.visibility == View.INVISIBLE,
-    "View should be INVISIBLE, but was ${value.visibilityAsString()}",
-    "View should not be INVISIBLE, but was"
+    { "View should be INVISIBLE, but was ${value.visibilityAsString()}" },
+    { "View should not be INVISIBLE, but was" }
   )
 }
 
@@ -34,8 +34,8 @@ fun View.shouldNotBeGone() = this shouldNot beGone()
 fun beGone() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.visibility == View.GONE,
-    "View should be GONE, but was ${value.visibilityAsString()}",
-    "View should not be GONE, but was"
+    { "View should be GONE, but was ${value.visibilityAsString()}" },
+    { "View should not be GONE, but was" }
   )
 
 }
@@ -54,8 +54,8 @@ fun View.shouldNotHaveContentDescription() = this shouldNot haveContentDescripti
 fun haveContentDescription() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.contentDescription != null && value.contentDescription.isNotBlank(),
-    "View should have ContentDescription, but had none",
-    "View should not have ContentDescription, but had ${value.contentDescription}"
+    { "View should have ContentDescription, but had none" },
+    { "View should not have ContentDescription, but had ${value.contentDescription}" }
   )
 }
 
@@ -65,8 +65,8 @@ infix fun View.shouldNotHaveContentDescription(contentDescription: String) = thi
 fun haveContentDescription(contentDescription: String) = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     contentDescription.contentEquals(value.contentDescription),
-    "View should have ContentDescription $contentDescription, but was ${value.contentDescription}",
-    "View should not have ContentDescription $contentDescription, but had"
+    { "View should have ContentDescription $contentDescription, but was ${value.contentDescription}" },
+    { "View should not have ContentDescription $contentDescription, but had" }
   )
 }
 
@@ -78,8 +78,8 @@ fun View.shouldNotHaveTag(key: Int, value: Any) = this shouldNot haveTag(key, va
 fun haveTag(key: Int, tagValue: Any) = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.getTag(key) == tagValue,
-    "View should have tag with Key $key and value $tagValue, but value was $tagValue",
-    "View should not have tag with Key $key and value $tagValue, but had"
+    { "View should have tag with Key $key and value $tagValue, but value was $tagValue" },
+    { "View should not have tag with Key $key and value $tagValue, but had" }
   )
 }
 
@@ -89,8 +89,8 @@ infix fun View.shouldNotHaveTag(value: Any) = this shouldNot haveTag(value)
 fun haveTag(tagValue: Any) = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.tag == tagValue,
-    "View should have tag with value $tagValue, but was ${value.tag}",
-    "View should not have tag with value $tagValue, but had"
+    { "View should have tag with value $tagValue, but was ${value.tag}" },
+    { "View should not have tag with value $tagValue, but had" }
   )
 }
 
@@ -100,8 +100,8 @@ fun View.shouldNotBeEnabled() = this shouldNot beEnabled()
 fun beEnabled() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.isEnabled,
-    "View should be enabled, but isn't",
-    "View should not be enabled, but is"
+    { "View should be enabled, but isn't" },
+    { "View should not be enabled, but is" }
   )
 }
 
@@ -111,8 +111,8 @@ fun View.shouldNotBeFocused() = this shouldNot beFocused()
 fun beFocused() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.isFocused,
-    "View should be focused, but isn't",
-    "View should not be focused, but is"
+    { "View should be focused, but isn't" },
+    { "View should not be focused, but is" }
   )
 }
 
@@ -122,8 +122,8 @@ fun View.shouldNotBeFocusable() = this shouldNot beFocusable()
 fun beFocusable() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.isFocusable,
-    "View should be focusable, but isn't",
-    "View should not be focusable, but is"
+    { "View should be focusable, but isn't" },
+    { "View should not be focusable, but is" }
   )
 }
 
@@ -133,8 +133,8 @@ fun View.shouldNotBeFocusableInTouchMode() = this shouldNot beFocusableInTouchMo
 fun beFocusableInTouchMode() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.isFocusableInTouchMode,
-    "View should be focusable in touch mode, but isn't",
-    "View should not be focusable in touch mode, but is"
+    { "View should be focusable in touch mode, but isn't" },
+    { "View should not be focusable in touch mode, but is" }
   )
 }
 
@@ -144,8 +144,8 @@ fun View.shouldNotBeClickable() = this shouldNot beClickable()
 fun beClickable() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.isClickable,
-    "View should be clickable, but isn't",
-    "View should not be clickable, but is"
+    { "View should be clickable, but isn't" },
+    { "View should not be clickable, but is" }
   )
 }
 
@@ -155,7 +155,7 @@ fun View.shouldNotBeLongClickable() = this shouldNot beLongClickable()
 fun beLongClickable() = object : Matcher<View> {
   override fun test(value: View) = MatcherResult(
     value.isLongClickable,
-    "View should be long clickable, but isn't",
-    "View should not be long clickable, but is"
+    { "View should be long clickable, but isn't" },
+    { "View should not be long clickable, but is" }
   )
 }

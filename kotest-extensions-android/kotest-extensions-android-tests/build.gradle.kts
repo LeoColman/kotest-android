@@ -3,6 +3,8 @@ plugins {
   kotlin("android")
 }
 
+kotlin { jvmToolchain(11) }
+
 android {
   namespace = "br.com.colman.kotest"
   compileSdk = 33
@@ -16,6 +18,11 @@ android {
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
+  publishing {
+    singleVariant("release") {
+      withSourcesJar()
+    }
+  }
 
   packagingOptions {
     exclude("META-INF/**")
@@ -27,6 +34,7 @@ android {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
   }
+  kotlinOptions { jvmTarget = "11"}
 
   testOptions {
     unitTests {

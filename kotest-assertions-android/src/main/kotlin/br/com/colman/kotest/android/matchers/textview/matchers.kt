@@ -18,8 +18,8 @@ infix fun TextView.shouldNotHaveText(text: String) = this shouldNot haveText(tex
 fun haveText(text: String) = object : Matcher<TextView> {
   override fun test(value: TextView) = MatcherResult(
     text.contentEquals(value.text),
-    "TextView should have text $text but was ${value.text}",
-    "TextView should not have text $text, but had"
+    { "TextView should have text $text but was ${value.text}" },
+    { "TextView should not have text $text, but had" }
   )
 
 }
@@ -32,8 +32,8 @@ fun haveTextColorId(@ColorRes colorRes: Int, theme: Theme? = null) = object: Mat
 
     return MatcherResult(
       resourceColor == currentColor,
-      "TextView should have color resource $resourceName(#$resourceColor) but was #$currentColor",
-      "TextView should not have color $resourceName(#$resourceColor), but had"
+      { "TextView should have color resource $resourceName(#$resourceColor) but was #$currentColor" },
+      { "TextView should not have color $resourceName(#$resourceColor), but had" }
     )
   }
 }
@@ -55,8 +55,8 @@ fun haveTextColor(@ColorInt color: Int) = object: Matcher<TextView> {
 
     return MatcherResult(
       color == currentColor,
-      "TextView should have color $color but was $currentColor",
-      "TextView should not have color $color, but had"
+      { "TextView should have color $color but was $currentColor" },
+      { "TextView should not have color $color, but had" }
     )
   }
 }
@@ -71,7 +71,7 @@ fun TextView.shouldNotBeAllCaps() = this shouldNot beAllCaps()
 fun beAllCaps() = object : Matcher<TextView> {
   override fun test(value: TextView) = MatcherResult(
     value.isAllCaps,
-    "TextView should have AllCaps as transformation method",
-    "TextView should not have AllCaps as transformation method"
+    { "TextView should have AllCaps as transformation method" },
+    { "TextView should not have AllCaps as transformation method" }
   )
 }
