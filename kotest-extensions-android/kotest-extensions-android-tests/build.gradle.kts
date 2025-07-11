@@ -45,7 +45,7 @@ android {
 
 
 dependencies {
-  implementation("androidx.test:core-ktx:1.5.0")
+  implementation("androidx.test:core-ktx:1.6.1")
   testImplementation(project(":kotest-extensions-android"))
   testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
   testImplementation("org.robolectric:robolectric:4.12.2")
