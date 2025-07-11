@@ -26,15 +26,6 @@ val javadocJar by tasks.registering(Jar::class) {
 }
 
 publishing {
-  repositories {
-    maven("https://oss.sonatype.org/service/local/staging/deploy/maven2") {
-      credentials {
-        username = System.getenv("OSSRH_USERNAME")
-        password = System.getenv("OSSRH_PASSWORD")
-      }
-    }
-  }
-
   publications {
     register("mavenJava", MavenPublication::class) {
       from(components["java"])
