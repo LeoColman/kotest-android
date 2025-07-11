@@ -3,9 +3,10 @@ plugins {
   id("org.jetbrains.dokka") version "1.9.10"
   `maven-publish`
   signing
+  id("com.gradleup.nmcp")
 }
 
-kotlin { jvmToolchain(11) }
+kotlin { jvmToolchain(17) }
 
 dependencies {
   api("junit:junit:4.13.2")

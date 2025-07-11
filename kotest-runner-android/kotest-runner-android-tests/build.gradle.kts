@@ -3,7 +3,7 @@ plugins {
   kotlin("android")
 }
 
-kotlin { jvmToolchain(11) }
+kotlin { jvmToolchain(17) }
 
 android {
   namespace = "br.com.colman.kotest"
@@ -12,7 +12,7 @@ android {
   defaultConfig {
     applicationId = "br.com.colman.kotest"
     targetSdk = 33
-    minSdk = 21
+    minSdk = 26
     versionCode = 100
     versionName = "1.0.0"
 
