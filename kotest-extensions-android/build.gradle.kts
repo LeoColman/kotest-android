@@ -4,7 +4,7 @@ plugins {
   kotlin("android")
   kotlin("kapt")
   id("com.android.library")
-  id("org.jetbrains.dokka") version "1.9.10"
+  id("org.jetbrains.dokka") version "1.9.20"
   `maven-publish`
   signing
 }
