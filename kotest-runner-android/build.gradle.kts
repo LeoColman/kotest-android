@@ -9,8 +9,8 @@ kotlin { jvmToolchain(11) }
 
 dependencies {
   api("junit:junit:4.13.2")
-  api("io.kotest:kotest-framework-engine:6.0.0.M4")
-  api("io.kotest:kotest-assertions-core:6.0.0.M4")
+  api("io.kotest:kotest-framework-engine:6.0.0.M5")
+  api("io.kotest:kotest-assertions-core:6.0.0.M5")
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
