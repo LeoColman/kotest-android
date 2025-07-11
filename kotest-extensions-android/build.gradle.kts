@@ -55,7 +55,7 @@ dependencies {
   implementation("androidx.appcompat:appcompat:1.7.0")
 
   androidTestImplementation(project(":kotest-runner-android"))
-  androidTestImplementation("androidx.test:runner:1.5.2")
+  androidTestImplementation("androidx.test:runner:1.6.2")
   androidTestImplementation("androidx.test:core:1.5.0")
   androidTestImplementation("androidx.test:rules:1.5.0")
   androidTestImplementation("androidx.test:core-ktx:1.5.0")

@@ -52,7 +52,7 @@ dependencies {
   implementation("io.kotest:kotest-assertions-core:6.0.0.M4")
 
   androidTestImplementation(project(":kotest-runner-android"))
-  androidTestImplementation("androidx.test:runner:1.5.2")
+  androidTestImplementation("androidx.test:runner:1.6.2")
   androidTestImplementation("androidx.test:core:1.5.0")
   androidTestImplementation("androidx.test:rules:1.5.0")
   androidTestImplementation("androidx.test:core-ktx:1.5.0")
