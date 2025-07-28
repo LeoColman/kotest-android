@@ -6,8 +6,8 @@ import io.kotest.core.extensions.ConstructorExtension
 import io.kotest.core.extensions.TestCaseExtension
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
-import io.kotest.core.test.TestResult
 import io.kotest.core.test.isRootTest
+import io.kotest.engine.test.TestResult
 import org.robolectric.annotation.Config
 import java.util.WeakHashMap
 import kotlin.reflect.KClass

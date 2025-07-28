@@ -1,8 +1,8 @@
 package br.com.colman.kotest
 
 import io.kotest.core.test.TestCase
-import io.kotest.core.test.TestResult
 import io.kotest.engine.listener.AbstractTestEngineListener
+import io.kotest.engine.test.TestResult
 import io.kotest.engine.test.names.DefaultDisplayNameFormatter
 import org.junit.runner.Description
 import org.junit.runner.Description.createTestDescription
