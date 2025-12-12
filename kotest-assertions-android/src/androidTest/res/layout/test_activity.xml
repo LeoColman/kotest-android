@@ -3,25 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="Kotest!" />
 
     <TextView
         android:id="@+id/textViewColored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/textViewAllCaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/textViewNotAllCaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAllCaps="false" />
 </LinearLayout>

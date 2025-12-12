@@ -48,13 +48,14 @@ class TextViewMatchersTests : FreeSpec({
     val scenario = launchActivity<TestActivity>()
 
     scenario.onActivity {
-      val tv = it.findViewById<TextView>(R.id.textViewAllCaps)
+      val tvAllCaps = it.findViewById<TextView>(R.id.textViewAllCaps)
+      val tvNotAllCaps = it.findViewById<TextView>(R.id.textViewNotAllCaps)
 
-      tv.shouldBeAllCaps()
-      shouldThrow<AssertionError> { tv.shouldNotBeAllCaps() }
+      tvAllCaps.shouldBeAllCaps()
+      shouldThrow<AssertionError> { tvAllCaps.shouldNotBeAllCaps() }
 
-      tv.shouldNotBeAllCaps()
-      shouldThrow<AssertionError> { tv.shouldBeAllCaps() }
+      tvNotAllCaps.shouldNotBeAllCaps()
+      shouldThrow<AssertionError> { tvNotAllCaps.shouldBeAllCaps() }
     }
   }
 })
