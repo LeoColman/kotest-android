@@ -71,7 +71,7 @@ Here is a Kotlin example of how to use the annotation:
 
 ```kotlin
 @RobolectricTest(sdk = Build.VERSION_CODES.O)
-class ContainedRobolectricRunnerMergeApiVersionTest {
+class ContainedRobolectricRunnerMergeApiVersionTest : StringSpec() {
   init {
     "Get the Build.VERSION_CODES.O" {
       Build.VERSION.SDK_INT shouldBe Build.VERSION_CODES.O
