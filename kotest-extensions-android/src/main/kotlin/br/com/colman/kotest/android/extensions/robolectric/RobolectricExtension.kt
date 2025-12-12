@@ -1,7 +1,7 @@
 package br.com.colman.kotest.android.extensions.robolectric
 
 import android.app.Application
-import io.kotest.core.config.AbstractPackageConfig
+import io.kotest.core.extensions.ApplyExtension
 import io.kotest.core.extensions.ConstructorExtension
 import io.kotest.core.extensions.TestCaseExtension
 import io.kotest.core.spec.Spec
@@ -13,10 +13,6 @@ import java.util.WeakHashMap
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 import kotlin.time.Duration
-
-class RoboElectricConfig: AbstractPackageConfig() {
-  override val extensions = listOf(RobolectricExtension())
-}
 
 /**
  * We override TestCaseExtension to configure the Robolectric environment because TestCase intercept
@@ -125,6 +121,9 @@ class RobolectricExtension : ConstructorExtension, TestCaseExtension {
 
 internal class KotestDefaultApplication : Application()
 
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+@ApplyExtension(RobolectricExtension::class)
 annotation class RobolectricTest(
   val application: KClass<out Application> = KotestDefaultApplication::class,
   val sdk: Int = -1,
