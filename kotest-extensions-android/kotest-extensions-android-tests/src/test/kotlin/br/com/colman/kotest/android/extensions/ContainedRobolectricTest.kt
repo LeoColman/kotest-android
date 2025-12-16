@@ -7,10 +7,8 @@ import android.os.Looper
 import androidx.test.core.app.ApplicationProvider
 import br.com.colman.kotest.TestApplication
 import br.com.colman.kotest.android.extensions.robolectric.RobolectricTest
-import io.kotest.core.coroutines.backgroundScope
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.core.test.testCoroutineScheduler
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.equals.shouldBeEqual
@@ -20,6 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.robolectric.Shadows.shadowOf
 
 private class MockApplication : Application()
@@ -79,7 +78,7 @@ abstract class ContainedRobolectricRunnerMergeOverwriteTest : StringSpec({
 @RobolectricTest(sdk = Build.VERSION_CODES.O_MR1)
 class ContainedRobolectricRunnerMergeOverwriteO_MR1Test : ContainedRobolectricRunnerMergeOverwriteTest()
 
-@OptIn(ExperimentalStdlibApi::class, ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 @RobolectricTest
 class ContainedRobolectricRunnerBehaviorSpecTest : BehaviorSpec({
   Context("Get the Application defined in AndroidManifest.xml") {
@@ -96,25 +95,23 @@ class ContainedRobolectricRunnerBehaviorSpecTest : BehaviorSpec({
     }
   }
 
-  coroutineTestScope = true
-
   Context("Collect the flow in TestScope") {
     Given("Some numbers and a SharedFlow") {
       val numbers = listOf(1, 2, 3)
       val sharedFlow = MutableSharedFlow<Int>()
 
       And("Launch to collect the flow") {
-        val collectedNumbers = mutableListOf<Int>()
-        backgroundScope.launch(UnconfinedTestDispatcher(testCoroutineScheduler)) {
-          sharedFlow.collect { collectedNumbers.add(it) }
-        }
+        Then("Collected the same numbers") {
+          runTest {
+            val collectedNumbers = mutableListOf<Int>()
+            backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+              sharedFlow.collect { collectedNumbers.add(it) }
+            }
 
-        When("Emit the numbers") {
-          numbers.forEach { launch { sharedFlow.emit(it) } }
+            numbers.forEach { launch { sharedFlow.emit(it) } }
 
-          testCoroutineScheduler.advanceUntilIdle()
+            testScheduler.advanceUntilIdle()
 
-          Then("Collected the same numbers") {
             collectedNumbers shouldBeEqual numbers
           }
         }

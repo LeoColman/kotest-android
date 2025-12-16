@@ -1,5 +1,6 @@
 package br.com.colman.kotest
 
+import io.kotest.common.KotestInternal
 import io.kotest.core.test.TestCase
 import io.kotest.engine.listener.AbstractTestEngineListener
 import io.kotest.engine.test.TestResult
@@ -9,6 +10,7 @@ import org.junit.runner.Description.createTestDescription
 import org.junit.runner.notification.Failure
 import org.junit.runner.notification.RunNotifier
 
+@OptIn(KotestInternal::class)
 class JUnitTestEngineListener(
    private val notifier: RunNotifier,
 ) : AbstractTestEngineListener() {
