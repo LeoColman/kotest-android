@@ -12,6 +12,9 @@ plugins {
 
 kotlin { jvmToolchain(11) }
 
+group = "br.com.colman"
+version = "1.1.2"
+
 android {
   namespace = "br.com.colman.kotest.assertions"
   compileSdk = 33
@@ -77,23 +80,14 @@ val javadocJar by tasks.registering(Jar::class) {
 }
 
 publishing {
-  repositories {
-    maven("https://oss.sonatype.org/service/local/staging/deploy/maven2") {
-      credentials {
-        username = System.getenv("OSSRH_USERNAME")
-        password = System.getenv("OSSRH_PASSWORD")
-      }
-    }
-  }
-
   publications.create<MavenPublication>("mavenJava") {
     afterEvaluate { from(components["release"]) }
     artifact(javadocJar.get())
     artifact(sourcesJar.get())
 
-    groupId = "br.com.colman"
+    groupId = project.group.toString()
     artifactId = "kotest-assertions-android"
-    version = System.getenv("RELEASE_VERSION") ?: "local"
+    version = project.version.toString()
 
     pom {
       name.set("kotest-assertions-android")

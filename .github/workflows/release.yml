@@ -1,11 +1,9 @@
-name: Release Extensions
+name: Release Artifacts
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Release Version"
-        required: true
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:

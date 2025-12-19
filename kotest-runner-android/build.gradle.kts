@@ -3,10 +3,13 @@ plugins {
   id("org.jetbrains.dokka") version "1.9.10"
   `maven-publish`
   signing
-  id("com.gradleup.nmcp")
 }
 
 kotlin { jvmToolchain(17) }
+
+
+group = "br.com.colman"
+version = "1.2.1"
 
 dependencies {
   api("junit:junit:4.13.2")
@@ -32,9 +35,9 @@ publishing {
       artifact(sourcesJar.get())
       artifact(javadocJar.get())
 
-      groupId = "br.com.colman"
+      groupId = project.group.toString()
       artifactId = "kotest-runner-android"
-      version = System.getenv("RELEASE_VERSION") ?: "local"
+      version = project.version.toString()
 
       pom {
         name.set("kotest-runner-android")

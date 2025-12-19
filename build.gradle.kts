@@ -9,12 +9,14 @@ nmcpAggregation {
   centralPortal {
     username.set(System.getenv("SONATYPE_USERNAME"))
     password.set(System.getenv("SONATYPE_PASSWORD"))
-    publishingType = "USER_MANAGED"
+    publishingType = "AUTOMATIC"
   }
 }
 
 dependencies {
   // Add all dependencies here 
   nmcpAggregation(project(":kotest-runner-android"))
+  nmcpAggregation(project(":kotest-assertions-android"))
+  nmcpAggregation(project(":kotest-extensions-android"))
 }
 
