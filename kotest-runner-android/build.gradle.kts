@@ -3,13 +3,14 @@ plugins {
   id("org.jetbrains.dokka") version "1.9.10"
   `maven-publish`
   signing
+    id("com.gradleup.nmcp").version("1.3.0")
 }
 
 kotlin { jvmToolchain(17) }
 
 
 group = "br.com.colman"
-version = "1.2.1"
+version = "1.2.2"
 
 dependencies {
   api("junit:junit:4.13.2")

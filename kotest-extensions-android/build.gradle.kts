@@ -7,12 +7,13 @@ plugins {
   id("org.jetbrains.dokka") version "1.9.10"
   `maven-publish`
   signing
+    id("com.gradleup.nmcp").version("1.3.0")
 }
 
 kotlin { jvmToolchain(11) }
 
 group = "br.com.colman"
-version = "0.1.7"
+version = "0.1.9"
 
 android {
   namespace = "br.com.colman.kotest.extensions"
