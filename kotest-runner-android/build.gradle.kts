@@ -10,7 +10,7 @@ kotlin { jvmToolchain(17) }
 
 
 group = "br.com.colman"
-version = "1.2.2"
+version = "1.2.3"
 
 dependencies {
   api("junit:junit:4.13.2")

@@ -18,7 +18,7 @@ import io.kotest.matchers.shouldBe
  * the isolation mode is really in effect: under SingleInstance it would keep incrementing, so a
  * regression that silently ignores the isolation mode fails these tests too.
  */
-@RobolectricTest(sdk = Build.VERSION_CODES.O)
+@RobolectricTest(sdk = [Build.VERSION_CODES.O])
 class InstancePerLeafRobolectricTest : StringSpec() {
   override fun isolationMode() = IsolationMode.InstancePerLeaf
 
