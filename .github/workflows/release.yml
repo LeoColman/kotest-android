@@ -8,6 +8,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - kotest-runner-android
+          - kotest-assertions-android
+          - kotest-extensions-android
 
     steps:
       - name: Checkout
@@ -15,8 +22,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Publish to Maven Central
-        run: ./gradlew publishAggregationToCentralPortal
+      - name: Publish ${{ matrix.module }} to Maven Central
+        run: ./gradlew :${{ matrix.module }}:publishAllPublicationsToCentralPortal
         env:
           RELEASE_VERSION: ${{ github.event.inputs.version }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}

@@ -132,3 +132,11 @@ signing {
 
   sign(publishing.publications)
 }
+
+nmcp {
+  publishAllPublicationsToCentralPortal {
+    username.set(System.getenv("SONATYPE_USERNAME"))
+    password.set(System.getenv("SONATYPE_PASSWORD"))
+    publishingType = "AUTOMATIC"
+  }
+}
