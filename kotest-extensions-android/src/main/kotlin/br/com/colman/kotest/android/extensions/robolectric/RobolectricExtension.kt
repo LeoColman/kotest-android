@@ -1,3 +1,5 @@
+@file:OptIn(io.kotest.common.KotestInternal::class)
+
 package br.com.colman.kotest.android.extensions.robolectric
 
 import android.app.Application
@@ -124,7 +126,7 @@ class RobolectricExtension : ConstructorExtension, TestCaseExtension {
 
     val nameToRunner = mutableMapOf<String, ContainedRobolectricRunner>()
     for (entry in sdkEntries.drop(1)) {
-      for (test in entry.spec.rootTests()) {
+      for (test in entry.spec.tests()) {
         val prefixedName = test.name.copy(name = "[SDK ${entry.sdk}] ${test.name.name}")
         nameToRunner[prefixedName.name] = entry.runner
         (primary.spec as RootScope).add(test.copy(name = prefixedName))

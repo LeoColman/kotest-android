@@ -14,7 +14,7 @@ plugins {
 kotlin { jvmToolchain(11) }
 
 group = "br.com.colman"
-version = "1.1.4"
+version = "1.1.5"
 
 android {
   namespace = "br.com.colman.kotest.assertions"
