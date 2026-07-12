@@ -50,7 +50,7 @@ dependencies {
   testImplementation("io.kotest:kotest-runner-junit5:6.2.2")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
   testImplementation("org.robolectric:robolectric:4.16.1")
-  testImplementation("androidx.test.espresso:espresso-core:3.6.1")
+  testImplementation("androidx.test.espresso:espresso-core:3.7.0")
   testImplementation("org.junit.vintage:junit-vintage-engine:5.11.3")
   androidTestImplementation("androidx.test:runner:1.5.2")
   androidTestImplementation("androidx.test:core:1.5.0")
