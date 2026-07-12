@@ -3,6 +3,7 @@ package br.com.colman.kotest
 import io.kotest.common.KotestInternal
 import io.kotest.core.names.DuplicateTestNameMode
 import io.kotest.core.spec.Spec
+import io.kotest.core.spec.SpecRef
 import io.kotest.engine.TestEngineLauncher
 import io.kotest.engine.config.ProjectConfigResolver
 import io.kotest.engine.extensions.DefaultExtensionRegistry
@@ -19,14 +20,15 @@ class KotestRunnerAndroid(
   private val kClass: Class<out Spec>
 ) : Runner() {
   private val formatter = DefaultDisplayNameFormatter()
+  private val specRef = SpecRef.Reference(kClass.kotlin)
 
   override fun run(notifier: RunNotifier) {
     runBlocking {
       val listener = JUnitTestEngineListener(notifier)
       TestEngineLauncher()
         .withListener(listener)
-        .withClasses(kClass.kotlin)
-        .launch()
+        .withSpecRefs(specRef)
+        .execute()
     }
   }
 
@@ -34,7 +36,7 @@ class KotestRunnerAndroid(
     val spec = runBlocking { SpecInstantiator(DefaultExtensionRegistry(), ProjectConfigResolver()).createAndInitializeSpec(kClass.kotlin).getOrThrow() }
     spec.duplicateTestNameMode = DuplicateTestNameMode.Warn
     val desc = Description.createSuiteDescription(spec::class.java)
-    Materializer().materialize(spec).forEach { rootTest ->
+    Materializer().materialize(spec, specRef).forEach { rootTest ->
       desc.addChild(
         describeTestCase(
           rootTest,
