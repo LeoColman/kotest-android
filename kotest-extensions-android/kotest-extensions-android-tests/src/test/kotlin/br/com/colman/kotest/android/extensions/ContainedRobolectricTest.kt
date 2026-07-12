@@ -47,10 +47,10 @@ class ContainedRobolectricRunnerChangeApiLevelOTest : StringSpec({
   }
 })
 
-@RobolectricTest(sdk = [Build.VERSION_CODES.KITKAT])
-class ContainedRobolectricRunnerChangeApiLevelKITKATTest : StringSpec({
-  "Get the Build.VERSION_CODES.KITKAT" {
-    Build.VERSION.SDK_INT shouldBe Build.VERSION_CODES.KITKAT
+@RobolectricTest(sdk = [Build.VERSION_CODES.M])
+class ContainedRobolectricRunnerChangeApiLevelMTest : StringSpec({
+  "Get the Build.VERSION_CODES.M" {
+    Build.VERSION.SDK_INT shouldBe Build.VERSION_CODES.M
   }
 })
 
