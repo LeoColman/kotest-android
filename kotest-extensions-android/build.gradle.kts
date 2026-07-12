@@ -13,7 +13,7 @@ plugins {
 kotlin { jvmToolchain(11) }
 
 group = "br.com.colman"
-version = "0.1.11"
+version = "0.1.12"
 
 android {
   namespace = "br.com.colman.kotest.extensions"
