@@ -45,7 +45,7 @@ android {
 
 
 dependencies {
-  implementation("androidx.test:core-ktx:1.5.0")
+  implementation("androidx.test:core-ktx:1.7.0")
   testImplementation(project(":kotest-extensions-android"))
   testImplementation("io.kotest:kotest-runner-junit5:6.2.2")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
