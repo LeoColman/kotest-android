@@ -57,7 +57,7 @@ configurations {
 }
 
 dependencies {
-  implementation("androidx.core:core-ktx:1.10.0")
+  implementation("androidx.core:core-ktx:1.19.0")
   implementation("io.kotest:kotest-assertions-core:6.2.2")
 
   androidTestImplementation(project(":kotest-runner-android"))
